@@ -58,7 +58,19 @@ class SimpleContactList:
             print(e)
             return result
 
-# изменение контакта (что не передали то не меняем)
+        # добавление контакта без блока try для проверки
+    def add_contact_without_try(self, contact_str: str) -> int:
+        result = -1
+        contact_ls = contact_str.split(',')
+        if not SimpleContactList.check_phone_number(contact_ls[1]):
+            raise ContactListPhone('Не верный формат номера телефона ')
+        result = SimpleContactList.gen_new_id()
+        self.contact_lst[str(result)] = contact_ls
+        return result
+
+
+
+    # изменение контакта (что не передали то не меняем)
     def change_contact(self,contact_str: str)->int:
         result=-1
         contact_ls=contact_str.split(',')
